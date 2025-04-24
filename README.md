@@ -1,19 +1,19 @@
-# 🧠 RAG for Culinary Assistance
+# 🧠 RAG pour l’assistance culinaire
 
-This project is a **Retrieval-Augmented Generation (RAG)** system designed to help users find and generate cooking recipes based on available ingredients and other constraints (diet, time, etc.).
+Ce projet est un système de **RAG (Retrieval-Augmented Generation)** conçu pour aider les utilisateurs à trouver et générer des recettes de cuisine à partir des ingrédients disponibles et d'autres contraintes (régime alimentaire, temps, etc.).
 
-## 📚 Data Source
+## 📚 Source des données
 
-We used a simple text file named `recettes.txt` as our primary data source, containing structured recipes with ingredients, instructions, and optional tags.
+Nous utilisons un fichier texte simple nommé `recettes.txt` comme source principale, contenant des recettes structurées avec ingrédients, instructions et éventuellement des tags.
 
-## 🏗️ Technology Stack
+## 🏗️ Technologies utilisées
 
-- **Vector Store**: [ChromaDB](https://www.trychroma.com/) – used to build and manage our recipe knowledge base.
-- **Language Model**: `llama3.2:1b` from [Ollama](https://ollama.com/) – for generating helpful, natural-sounding recipe suggestions.
-- **Framework**: [LangChain](https://www.langchain.com/) – to handle document loading, embedding, retrieval, and LLM interaction.
-- **Prompt Engineering**: We designed and iteratively improved a custom prompt template tailored for culinary use cases to guide the language model in providing relevant and accurate suggestions.
+- **Base vectorielle** : [ChromaDB](https://www.trychroma.com/) – utilisée pour construire et gérer notre base de connaissances culinaire.
+- **Modèle de langage** : `llama3.2:1b` de [Ollama](https://ollama.com/) – pour générer des suggestions de recettes naturelles et utiles.
+- **Framework** : [LangChain](https://www.langchain.com/) – pour gérer le chargement des documents, l'embedding, la recherche et l'interaction avec le LLM.
+- **Ingénierie de prompt** : Un prompt personnalisé a été conçu et amélioré pour guider le modèle dans des cas d’usage culinaires précis et pertinents.
 
-## 👥 Team Members
+## 👥 Membres de l’équipe
 
 - **Zeineb Boussaidi**  
 - **Achref Essefi**  
@@ -21,6 +21,57 @@ We used a simple text file named `recettes.txt` as our primary data source, cont
 - **Wided Askri**  
 - **Nourchene Laroussi**
 
----
+## 🚀 Étapes d’exécution
 
-This RAG system demonstrates how AI can be applied to enhance daily life through accessible and personalized cooking assistance.
+### 1. 🔧 Installation des dépendances
+
+Crée un environnement virtuel (optionnel mais recommandé) :
+
+```bash
+python -m venv env
+source env/bin/activate  # Sur Windows : env\Scripts\activate
+````
+Installe les dépendances du projet :
+
+```bash
+pip install -r requirements.txt
+````
+
+### 2. 🤖 Installation de Ollama
+
+Installe Ollama depuis le site officiel :  
+👉 [https://ollama.com](https://ollama.com)
+
+Une fois installé, lance cette commande pour télécharger le modèle utilisé dans ce projet :
+
+```bash
+ollama pull llama3.2:1b
+````
+
+### 3. 🧠 Construction de la base vectorielle
+
+Lance le script suivant pour créer la base de connaissances vectorielle à partir du fichier `recettes.txt`, en utilisant l'embedding `Lajavaness/bilingual-embedding-large` :
+
+```bash
+python dbTreatment.py
+````
+Ce script va :
+
+- Charger et découper les recettes en morceaux exploitables
+
+- Générer les vecteurs d’embedding
+
+- Stocker le tout dans une base vectorielle Chroma
+
+4. 🍽️ Exécution du système RAG
+Lance le script principal pour interagir avec le système de génération de recettes assisté par IA :
+
+```bash
+python prompt.py
+````
+Tu pourras ensuite poser des questions comme :
+```bash
+>> Que puis-je cuisiner avec des œufs et du parmesan ?
+````
+Le système te proposera des recettes adaptées, basées sur les ingrédients et les contraintes mentionnées.
+
